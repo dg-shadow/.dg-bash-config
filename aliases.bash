@@ -6,3 +6,5 @@ alias ...="cd ../.."
 alias ....="cd ../../../"
 alias .....="cd ../../../../"
 alias cpr='cp -r'
+
+alias psros='ps aux | grep ros'
