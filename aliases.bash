@@ -6,6 +6,9 @@ alias emacsd='emacs $1 & disown'
 alias emacsc='emacsclient -n'
 
 
+git config --global alias.ticket  '!f() { ticketnum=$1; branchName=$2; git checkout -b "F#SRC-${ticketnum}/${branchName}"; }; f'
+
+
 alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../../"
