@@ -19,3 +19,7 @@ alias psros='ps aux | grep ros'
 alias rossrc='roscd ; cd ../src'
 
 alias l='ls -l -a -h'
+
+alias docker_new_with_networking='docker run -it --privileged --hostname=hestia_docker --network=host -e DISPLAY -e QT_X11_NO_MITSHM=1 -e LOCAL_USER_ID=$(id -u) --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" shadowrobot/dexterous-hand:kinetic'
+
+alias docker_new_no_networking='docker run -it --host_name=hestia_docker -e DISPLAY -e QT_X11_NO_MITSHM=1 -e LOCAL_USER_ID=$(id -u) --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" shadowrobot/dexterous-hand:kinetic'
