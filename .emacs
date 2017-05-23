@@ -6,3 +6,5 @@
 (add-to-list 'auto-mode-alist '("\\.xacro\\'" . xml-mode))
 (add-to-list 'auto-mode-alist '("\\.urdf\\'" . xml-mode))
 (add-to-list 'auto-mode-alist '("\\.srdf\\'" . xml-mode))
+(when (display-graphic-p)
+    (server-mode))
