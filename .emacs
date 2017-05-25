@@ -6,6 +6,15 @@
 (add-to-list 'auto-mode-alist '("\\.xacro\\'" . xml-mode))
 (add-to-list 'auto-mode-alist '("\\.urdf\\'" . xml-mode))
 (add-to-list 'auto-mode-alist '("\\.srdf\\'" . xml-mode))
+
+(require 'yaml-mode)
+(add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
+(add-to-list 'auto-mode-alist '("\\.yaml\\'" . yaml-mode))
+(add-hook 'yaml-mode-hook
+          '(lambda ()
+             (define-key yaml-mode-map "\C-m" 'newline-and-indent)))
+
+
 (load "server")
 (when (display-graphic-p)
   (unless (server-running-p)
@@ -16,8 +25,6 @@
 
 (setq-default indent-tabs-mode nil)
 
-(require 'yaml-mode)
-(add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
 
 (add-hook 'c-mode-hook
 	  (lambda ()
@@ -40,3 +47,4 @@
 	    (add-to-list 'write-file-functions 'delete-trailing-whitespace)
 	    (add-to-list 'write-file-functions 'untabify)
 	    ))
+
