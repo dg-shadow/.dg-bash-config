@@ -6,5 +6,37 @@
 (add-to-list 'auto-mode-alist '("\\.xacro\\'" . xml-mode))
 (add-to-list 'auto-mode-alist '("\\.urdf\\'" . xml-mode))
 (add-to-list 'auto-mode-alist '("\\.srdf\\'" . xml-mode))
+(load "server")
 (when (display-graphic-p)
-    (server-mode))
+  (unless (server-running-p)
+    (server-mode)))
+
+(setq c-default-style "bsd"
+      c-basic-offset 4)
+
+(setq-default indent-tabs-mode nil)
+
+(require 'yaml-mode)
+(add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
+
+(add-hook 'c-mode-hook
+	  (lambda ()
+	    (add-to-list 'write-file-functions 'delete-trailing-whitespace)
+	    (add-to-list 'write-file-functions 'untabify)
+	    ))
+(add-hook 'python-mode-hook
+	  (lambda ()
+	    (add-to-list 'write-file-functions 'delete-trailing-whitespace)
+	    (add-to-list 'write-file-functions 'untabify)
+	    ))
+(add-hook 'xml-mode-hook
+	  (lambda ()
+	    (add-to-list 'write-file-functions 'delete-trailing-whitespace)
+	    (add-to-list 'write-file-functions 'untabify)
+	    ))
+
+(add-hook 'yaml-mode-hook
+	  (lambda ()
+	    (add-to-list 'write-file-functions 'delete-trailing-whitespace)
+	    (add-to-list 'write-file-functions 'untabify)
+	    ))
