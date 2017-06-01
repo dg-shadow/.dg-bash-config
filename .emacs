@@ -36,21 +36,21 @@
 (add-hook 'c-mode-hook
 	  (lambda ()
 	    (add-to-list 'write-file-functions 'delete-trailing-whitespace)
-	    (add-to-list 'write-file-functions 'untabify)
+	    (add-to-list 'write-file-functions 'untabify ('start 'end))
 	    ))
 (add-hook 'python-mode-hook
 	  (lambda ()
 	    (add-to-list 'write-file-functions 'delete-trailing-whitespace)
-	    (add-to-list 'write-file-functions 'untabify)
+	    (add-to-list 'write-file-functions 'untabify ('start 'end))
 	    ))
 (add-hook 'xml-mode-hook
 	  (lambda ()
 	    (add-to-list 'write-file-functions 'delete-trailing-whitespace)
-	    (add-to-list 'write-file-functions 'untabify)
+	    (add-to-list 'write-file-functions 'untabify ('start 'end))
 	    ))
 
 (add-hook 'yaml-mode-hook
 	  (lambda ()
 	    (add-to-list 'write-file-functions 'delete-trailing-whitespace)
-	    (add-to-list 'write-file-functions 'untabify)
+	    (add-to-list 'write-file-functions 'untabify ('start 'end))
 	    ))
