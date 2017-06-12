@@ -28,7 +28,7 @@
     (server-mode)))
 
 (setq c-default-style "bsd"
-      c-basic-offset 4)
+      c-basic-offset 2)
 
 (setq-default indent-tabs-mode nil)
 
