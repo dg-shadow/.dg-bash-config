@@ -34,7 +34,7 @@
 
 
 (add-hook 'c-mode-hook
-	  (lambda ()
+          (lambda ()
 	    (add-to-list 'write-file-functions 'delete-trailing-whitespace)
 	    (add-to-list 'write-file-functions 'untabify ('start 'end))
 	    ))
@@ -54,3 +54,4 @@
 	    (add-to-list 'write-file-functions 'delete-trailing-whitespace)
 	    (add-to-list 'write-file-functions 'untabify ('start 'end))
 	    ))
+ 
