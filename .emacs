@@ -7,6 +7,8 @@
 (global-set-key "\C-R" 'recentf-open-files)
 
 
+(setq visible-bell t)
+
 (add-to-list 'auto-mode-alist '("\\.launch\\'" . xml-mode))
 (add-to-list 'auto-mode-alist '("\\.xacro\\'" . xml-mode))
 (add-to-list 'auto-mode-alist '("\\.urdf\\'" . xml-mode))
@@ -26,7 +28,7 @@
     (server-mode)))
 
 (setq c-default-style "bsd"
-      c-basic-offset 4)
+      c-basic-offset 2)
 
 (setq-default indent-tabs-mode nil)
 

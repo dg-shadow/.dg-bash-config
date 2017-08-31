@@ -1,5 +1,5 @@
 [alias]
-	ticket = "!f() { ticketnum=$1; branchName=$2; git checkout -b \"F#SRC-${ticketnum}/${branchName}\"; }; f"
+	ticket = "!f() { ticketnum=$1; branchName=$2; git checkout -b \"F#SRC-${ticketnum}_${branchName}\"; }; f"
 [user]
 	email = dg@shadowrobot.com
 	name = dg-shadow
