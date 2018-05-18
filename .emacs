@@ -32,6 +32,7 @@
 
 (setq-default indent-tabs-mode nil)
 
+(setq column-number-mode t)
 
 (add-hook 'c-mode-hook
           (lambda ()
