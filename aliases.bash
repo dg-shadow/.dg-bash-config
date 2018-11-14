@@ -5,6 +5,8 @@ alias sourcebashrc='source ~/.bashrc'
 alias emacsd='emacs $1 & disown'
 alias emacsc='emacsclient -n'
 
+alias upgrade_motor_config_to_kinetic='sed  -Ei "s/( *)imax\: ([0-9]*)/\1imax: 0\n\1torque_limiter_gain: \2/g" motor_board_effort_controllers.yaml ; sed  -Ei "s/^( +)d\: ([0-9]*)/\1d: 0\n\1torque_limit: \2/g" motor_board_effort_controllers.yaml;'
+
 
 git config --global alias.ticket  '!f() { ticketnum=$1; branchName=$2; git checkout -b "F#SRC-${ticketnum}_${branchName}"; }; f'
 
@@ -28,3 +30,24 @@ set_hand_h_ethercat() { echo Setting ethercat port to $1;  pushd . > /dev/null ;
 
 git config --global alias.sshify '!f() { git remote set-url origin $(git remote get-url origin | sed -En "s/https:\/\/github.com\//git@github.com:/p") ; }; f'
 git config --global alias.unsshify '!f() { git remote set-url origin $(git remote get-url origin | sed -En "s/git@github.com:/https:\/\/github.com\//p") ; }; f'
+
+_eepromtool_completions()
+{
+    find_eth_perl_string='@list = split("\n", `ip addr`);
+my @output;
+
+for (@list)
+{
+    push(@output, $1) if (/\d+: ([^:]+):.*/);
+}
+
+print join(" ", @output);'
+
+    if [ "${#COMP_WORDS[@]}" == "2" ]; then
+
+        addr_list=$(echo $find_eth_perl_string | perl) 
+        COMPREPLY=($(compgen -W "$addr_list" "${COMP_WORDS[1]}"))
+    fi
+}
+
+complete -F _eepromtool_completions eepromtool
