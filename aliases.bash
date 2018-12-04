@@ -7,8 +7,9 @@ alias emacsc='emacsclient -n'
 
 alias upgrade_motor_config_to_kinetic='sed  -Ei "s/( *)imax\: ([0-9]*)/\1imax: 0\n\1torque_limiter_gain: \2/g" motor_board_effort_controllers.yaml ; sed  -Ei "s/^( +)d\: ([0-9]*)/\1d: 0\n\1torque_limit: \2/g" motor_board_effort_controllers.yaml;'
 
+export DG_SOFTWARE_PROJECT=DMRH
 
-git config --global alias.ticket  '!f() { ticketnum=$1; branchName=$2; git checkout -b "F#SRC-${ticketnum}_${branchName}"; }; f'
+git config --global alias.ticket  '!f() { ticketnum=$1; branchName=$2; git checkout -b "F#${DG_SOFTWARE_PROJECT}-${ticketnum}_${branchName}"; }; f'
 
 
 alias ..="cd .."

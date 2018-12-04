@@ -1,5 +1,5 @@
 [alias]
-	ticket = "!f() { ticketnum=$1; branchName=$2; git checkout -b \"F#SRC-${ticketnum}_${branchName}\"; }; f"
+	ticket = "!f() { ticketnum=$1; branchName=$2; git checkout -b \"F#${DG_SOFTWARE_PROJECT}-${ticketnum}_${branchName}\"; }; f"
 	sshify = "!f() { git remote set-url origin $(git remote get-url origin | sed -En \"s/https:\\/\\/github.com\\//git@github.com:/p\") ; }; f"
 	unsshify = "!f() { git remote set-url origin $(git remote get-url origin | sed -En \"s/git@github.com:/https:\\/\\/github.com\\//p\") ; }; f"
 [user]
