@@ -28,6 +28,7 @@ alias docker_new_with_networking='f() { docker run -it --privileged $1 --network
 alias docker_new_no_networking='f() { docker run -it $1 -e DISPLAY -e QT_X11_NO_MITSHM=1 -e LOCAL_USER_ID=$(id -u) --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" shadowrobot/dexterous-hand:kinetic ; }; f'
 
 set_hand_h_ethercat() { echo Setting ethercat port to $1;  pushd . > /dev/null ; roscd fh_config/hardware ; sed -i "s/ethercat_port: \w*/ethercat_port: $1/" *.yaml ; popd > /dev/null ; }
+set_hand_r_ethercat() { echo Setting ethercat port to $1;  pushd . > /dev/null ; roscd rh_robot/config ; sed -i "s/ethercat_port: \w*/ethercat_port: $1/" *.yaml ; popd > /dev/null ; }
 
 set_hand_e_ethercat() { echo Setting ethercat port to $1;  pushd . > /dev/null ; roscd sr_ethercat_hand_config/launch ; sed -i "s/<arg name=\"eth_port\" value=\"\w*\"/<arg name=\"eth_port\" value=\"$1\"/" *.launch ; popd > /dev/null ; }
 
@@ -55,3 +56,4 @@ print join(" ", @output);'
 }
 
 complete -F _eepromtool_completions eepromtool
+alias lint_on_dir='find . -name *.cpp | xargs -I f rosrun roslint cpplint f ; find . -name *.h | xargs -I f rosrun roslint cpplint f '
