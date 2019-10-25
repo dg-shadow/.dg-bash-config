@@ -34,6 +34,7 @@
 (setq-default indent-tabs-mode nil)
 (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
 
+(setq column-number-mode t)
 
 (add-hook 'c-mode-hook
           (lambda ()
