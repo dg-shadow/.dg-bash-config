@@ -29,8 +29,10 @@
 
 (setq c-default-style "bsd"
       c-basic-offset 2)
+(c-set-offset 'innamespace 0)
 
 (setq-default indent-tabs-mode nil)
+(add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
 
 
 (add-hook 'c-mode-hook
@@ -54,4 +56,3 @@
 	    (add-to-list 'write-file-functions 'delete-trailing-whitespace)
 	    (add-to-list 'write-file-functions 'untabify ('start 'end))
 	    ))
- 
