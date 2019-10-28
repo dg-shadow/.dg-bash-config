@@ -23,6 +23,11 @@ alias rossrc='roscd ; cd ../src'
 
 alias l='ls -l -a -h'
 
+alias roscd='f() { if [ $# == 0 ] ; then  roscd ; cd .. ; else roscd $1 ; fi ; }; f'
+
+alias lint_cpp="f() { local array_h ; if [ $# == 0 ] ; then FILE=. ; else FILE=$1 ; fi ; echo $FILE ; IFS=' ' read -r -a array_h <<< $(find . -name *.h) ; for element in ${array_h[@]} ; do  echo $element; done ; } ; f"
+
+
 alias docker_new_with_networking='f() { docker run -it --privileged $1 --network=host -e DISPLAY -e QT_X11_NO_MITSHM=1 -e LOCAL_USER_ID=$(id -u) --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" shadowrobot/dexterous-hand:kinetic ; }; f '
 
 alias docker_new_no_networking='f() { docker run -it $1 -e DISPLAY -e QT_X11_NO_MITSHM=1 -e LOCAL_USER_ID=$(id -u) --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" shadowrobot/dexterous-hand:kinetic ; }; f'
@@ -56,4 +61,4 @@ print join(" ", @output);'
 }
 
 complete -F _eepromtool_completions eepromtool
-alias lint_on_dir='find . -name *.cpp | xargs -I f rosrun roslint cpplint f ; find . -name *.h | xargs -I f rosrun roslint cpplint f '
+

@@ -57,3 +57,8 @@
 	    (add-to-list 'write-file-functions 'delete-trailing-whitespace)
 	    (add-to-list 'write-file-functions 'untabify ('start 'end))
 	    ))
+<<<<<<< Updated upstream
+=======
+
+(put 'upcase-region 'disabled nil)
+>>>>>>> Stashed changes
