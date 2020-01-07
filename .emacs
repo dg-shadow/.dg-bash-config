@@ -41,6 +41,20 @@
 	    (add-to-list 'write-file-functions 'delete-trailing-whitespace)
 	    (add-to-list 'write-file-functions 'untabify ('start 'end))
 	    ))
+
+(add-hook 'c++-mode-hook
+          (lambda ()
+	    (add-to-list 'write-file-functions 'delete-trailing-whitespace)
+	    (add-to-list 'write-file-functions 'untabify ('start 'end))
+	    ))
+
+(add-hook 'cc-mode-hook
+          (lambda ()
+	    (add-to-list 'write-file-functions 'delete-trailing-whitespace)
+	    (add-to-list 'write-file-functions 'untabify ('start 'end))
+	    ))
+
+
 (add-hook 'python-mode-hook
 	  (lambda ()
 	    (add-to-list 'write-file-functions 'delete-trailing-whitespace)
@@ -57,8 +71,5 @@
 	    (add-to-list 'write-file-functions 'delete-trailing-whitespace)
 	    (add-to-list 'write-file-functions 'untabify ('start 'end))
 	    ))
-<<<<<<< Updated upstream
-=======
 
-(put 'upcase-region 'disabled nil)
->>>>>>> Stashed changes
+
