@@ -60,7 +60,15 @@ new_nvidia_docker() {
     fi
     docker run $name_string -it --security-opt seccomp=unconfined --network=host --pid=host --privileged --runtime nvidia -e NVIDIA_DRIVER_CAPABILITIES=all -e NVIDIA_VISIBLE_DEVICES=all -e DISPLAY -e QT_X11_NO_MITSHM=1 -e LOCAL_USER_ID=$(id -u) -e ROS_MASTER_URI=http://localhost:11311 -v /tmp/.X11-unix:/tmp/.X11-unix:rw -v /dev/input:/dev/input:rw -v /run/udev/data:/run/udev/data:rw $1 bash -c "echo /usr/local/lib/x86_64-linux-gnu | sudo tee /etc/ld.so.conf.d/glvnd.conf && sudo ldconfig && terminator"; }
 
+new_docker() {
+    name_string=""
+    if [ ! -z "$2" ] ; then
+       name_string="--name $2"
+    fi
+    docker run $name_string -it --security-opt seccomp=unconfined --network=host --pid=host --privileged --ulimit core=-1 -e DISPLAY -e QT_X11_NO_MITSHM=1 -e LOCAL_USER_ID=$(id -u) -e interface=enx5647929203 -e ROS_MASTER_URI=http://localhost:11311 -v /tmp/.X11-unix:/tmp/.X11-unix:rw -v /dev/input:/dev/input:rw -v /run/udev/data:/run/udev/data:rw $1 bash -c "terminator -T 'Teleop Server Container' -x bash -c '/usr/local/bin/teleop-server-setup.sh && bash'"
+}
 complete -F _docker_image_completion new_nvidia_docker
+complete -F _docker_image_completion new_docker
 
 set_hand_h_ethercat() { echo Setting ethercat port to $1;  pushd . > /dev/null ; roscd fh_config/hardware ; sed -i "s/ethercat_port: \w*/ethercat_port: $1/" *.yaml ; popd > /dev/null ; }
 set_hand_r_ethercat() { echo Setting ethercat port to $1;  pushd . > /dev/null ; roscd rh_robot/config ; sed -i "s/ethercat_port: \w*/ethercat_port: $1/" *.yaml ; popd > /dev/null ; }
