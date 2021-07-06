@@ -54,6 +54,10 @@
 	    (add-to-list 'write-file-functions 'untabify ('start 'end))
 	    ))
 
+(add-hook 'python-mode-hook
+          (lambda ()
+            (setq indent-tabs-mode t)
+            (setq tab-width 4)))
 
 (add-hook 'python-mode-hook
 	  (lambda ()
@@ -71,5 +75,3 @@
 	    (add-to-list 'write-file-functions 'delete-trailing-whitespace)
 	    (add-to-list 'write-file-functions 'untabify ('start 'end))
 	    ))
-
-
