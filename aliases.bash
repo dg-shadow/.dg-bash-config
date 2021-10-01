@@ -100,4 +100,4 @@ print join(" ", @output);'
 
 complete -F _eepromtool_completions eepromtool
 
-alias strip_log=sed "s/.*]//"
+alias strip_log='sed "s/.*]//"'
