@@ -75,3 +75,4 @@
 	    (add-to-list 'write-file-functions 'delete-trailing-whitespace)
 	    (add-to-list 'write-file-functions 'untabify ('start 'end))
 	    ))
+(put 'upcase-region 'disabled nil)

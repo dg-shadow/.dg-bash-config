@@ -19,7 +19,7 @@ alias .....="cd ../../../../"
 alias cpr='cp -r'
 
 alias psros='ps aux | grep ros'
-alias rossrc='roscd ; cd ../src'
+alias rossrc='roscd ; cd src'
 
 alias l='ls -l -a -h'
 
