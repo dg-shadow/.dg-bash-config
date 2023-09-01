@@ -101,3 +101,24 @@ print join(" ", @output);'
 complete -F _eepromtool_completions eepromtool
 
 alias strip_log='sed "s/.*]//"'
+
+_container_names()
+{
+    if [ "${#COMP_WORDS[@]}" == "2" ]; then
+        COMPREPLY=($(compgen -W $(docker ps --format "{{.Names}}")))
+    fi
+}
+
+add_key()
+{
+    docker cp ~/.ssh/id_rsa $1:/home/user/.ssh
+    docker cp ~/.ssh/id_rsa.pub $1:/home/user/.ssh
+ 
+    docker exec $1 sh -c 'echo hello >>  /home/user/.ssh/authorized_keys'
+
+    docker exec $1 echo eval "$(ssh-agent -s)"
+    docker exec $1 sleep 1
+    docker exec $1 ssh-add
+}
+
+complete -F _container_names add_key
