@@ -109,6 +109,11 @@ _container_names()
     fi
 }
 
+check_pylintrc() { if ! [ -f /tmp/pylintrc ]; then wget -O /tmp/pylintrc https://raw.githubusercontent.com/shadow-robot/sr-build-tools/fd2350484fec1004838e41c3f643aad888be0170/ansible/roles/ci/code_style_check/python/files/pylintrc; fi; }
+check_apt_package() { if [[ $(dpkg -l | grep -w $1 | wc -l) -eq 0 ]]; then sudo apt install -y $1; fi; }
+sr_pylint_here() { check_pylintrc; check_apt_package "pylint";  pylint --rcfile /tmp/pylintrc --max-line-length 120 *; }
+sr_pylint_sorted_here() { sr_pylint_here | sort -V | grep -v "\*\*\*\*\*\*\*\*"; }
+
 add_key()
 {
     docker cp ~/.ssh/id_rsa $1:/home/user/.ssh
