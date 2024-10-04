@@ -100,7 +100,75 @@ print join(" ", @output);'
 
 complete -F _eepromtool_completions eepromtool
 
-alias strip_log='sed "s/.*]//"'
+alias strip_log='sed -e "s/\([0-9.]*\) \([A-Z]*\).*]/\1 \2/"'
+
+strip_log2 ()
+{
+    perl -e'
+         use warnings;
+         use strict;
+
+         use Term::ANSIColor qw(:constants);
+         my @lines = <>; 
+         for (@lines)
+         {
+           if (/([\d\.]+) (\w+) [^\]]+] (.*)/)
+           {
+             my $output = "$1 - $2 - $3\n" ;
+             
+             if ($2 eq "WARN") {
+                print YELLOW, $output, RESET; 
+             } elsif ($2 eq "DEBUG") 
+             { 
+               print GREEN, $output, RESET;
+             } elsif ($2 eq "FATAL" || $2 eq "ERROR") 
+             {
+               print RED, $output, RESET;
+             }
+             else {
+               print $output; 
+             }
+          }
+          else { print ; }
+       }
+    '  
+}
+
+nice_strip ()
+{
+    perl -e' 
+         use warnings;
+         use strict;
+
+         use Term::ANSIColor qw(:constants);
+         my @lines = <>; 
+         for (@lines)
+         {
+           unless (/([\d\.]+) (\w+) [^\]]+] (.*)/)
+           {
+              print;  next;
+           }
+           chomp(my $date = `date -d\@$1`);
+           my $output = "$date - $2 - $1\n-\n$3\n--------\n\n";
+
+
+           if ($2 eq "WARN") {
+              print YELLOW, $output, RESET; 
+           } elsif ($2 eq "DEBUG") 
+           { 
+             print GREEN, $output, RESET;
+           } elsif ($2 eq "FATAL" || $2 eq "ERROR") 
+           {
+             print RED, $output, RESET;
+           }
+           else {
+             print $output; 
+           }
+
+         }
+   '
+    
+}
 
 _container_names()
 {
@@ -127,3 +195,6 @@ add_key()
 }
 
 complete -F _container_names add_key
+alias docker_login="aws ecr get-login-password --region eu-west-2 | docker login --username AWS --password-stdin 080653068785.dkr.ecr.eu-west-2.amazonaws.com"
+
+create_nvidia() { docker create --name $1 -it --security-opt seccomp=unconfined --network=host --ipc=host --pid=host --privileged --gpus all -e NVIDIA_DRIVER_CAPABILITIES=all -e NVIDIA_VISIBLE_DEVICES=all -e DISPLAY -e QT_X11_NO_MITSHM=1 -e LOCAL_USER_ID=$(id -u) -e XDG_RUNTIME_DIR=/run/user/$(id -u) -e ROS_MASTER_URI=http://localhost:11311 -v /tmp/.X11-unix:/tmp/.X11-unix:rw -v /dev/input:/dev/input:rw -v /dev:/dev -v /run/udev/data:/run/udev/data:rw $2 terminator ; }
